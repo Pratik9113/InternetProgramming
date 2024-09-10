@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Pratik Enterprises - Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #f4f4f4;
+            padding: 20px;
+            text-align: center;
+        }
+        header img {
+            width: 150px;
+        }
+        nav {
+            margin: 20px 0;
+            text-align: center;
+        }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #333;
+        }
+        section {
+            padding: 20px;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        ul {
+            list-style-type: square;
+            margin: 0;
+            padding: 0;
+        }
+        ul li {
+            padding: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="data:image/jpeg;base64,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" alt="Pratik Enterprises Logo">
+    <h1>Welcome to Pratik Enterprises</h1>
+</header>
+
+<nav>
+    <a href="#about">About Us</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact Us</a>
+</nav>
+
+<section id="about">
+    <h2>About Us</h2>
+    <p>Pratik Enterprises is a leading supplier of high-quality motors and motor parts, serving various industries with reliable products and services. Our commitment to excellence and customer satisfaction has made us a trusted name in the industry.</p>
+    <audio controls>
+        <source src="company-introduction.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <video width="320" height="240" controls>
+        <source src="data:image/jpeg;base64,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" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</section>
+
+<section id="services">
+    <h2>Our Services</h2>
+    <ul>
+        <li>Motor Sales: High-performance motors for industrial and commercial applications.</li>
+        <li>Motor Parts Supply: A wide range of motor parts, including bearings, gears, and coils.</li>
+        <li>Repair and Maintenance: Expert repair and maintenance services for all types of motors.</li>
+        <li>Custom Motor Solutions: Tailored motor solutions to meet specific client needs.</li>
+    </ul>
+</section>
+
+<section id="contact">
+    <h2>Contact Us</h2>
+    <table>
+        <tr>
+            <th>Company Name</th>
+            <td>Pratik Enterprises</td>
+        </tr>
+        <tr>
+            <th>Address</th>
+            <td>123 Industrial Avenue, Motor City, TX 75001</td>
+        </tr>
+        <tr>
+            <th>Phone</th>
+            <td>+1 (234) 567-8901</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td><a href="mailto:info@pratikenterprises.com">info@pratikenterprises.com</a></td>
+        </tr>
+        <tr>
+            <th>Website</th>
+            <td><a href="https://www.pratikenterprises.com">www.pratikenterprises.com</a></td>
+        </tr>
+    </table>
+</section>
+
+<footer>
+    <p>Follow us on:
+        <a href="https://www.facebook.com/pratikenterprises" target="_blank">Facebook</a> 
+        <a href="https://www.twitter.com/pratikenterprises" target="_blank">Twitter</a> 
+        <a href="https://www.linkedin.com/pratikenterprises" target="_blank">LinkedIn</a>
+    </p>
+    <p>&copy; 2024 Pratik Enterprises. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
