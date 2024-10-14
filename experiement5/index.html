@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced JavaScript Assignment</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-8">
+  <div class="container mx-auto">
+    
+    <!-- Basic Calculator with Promises -->
+    <div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg mb-10">
+      <h2 class="text-2xl font-bold text-center mb-4">Basic Calculator with Promises</h2>
+      <form id="calculator-form" class="flex flex-col space-y-4">
+        <input type="number" id="num1" placeholder="Enter first number" class="p-2 border border-gray-300 rounded">
+        <input type="number" id="num2" placeholder="Enter second number" class="p-2 border border-gray-300 rounded">
+        <select id="operation" class="p-2 border border-gray-300 rounded">
+          <option value="+">Addition (+)</option>
+          <option value="-">Subtraction (-)</option>
+          <option value="*">Multiplication (*)</option>
+          <option value="/">Division (/)</option>
+        </select>
+        <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">Calculate</button>
+      </form>
+      <p id="result" class="text-lg font-semibold mt-4"></p>
+    </div>
+
+    <!-- Custom Iterator for Squaring Numbers -->
+    <div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg mb-10">
+      <h2 class="text-2xl font-bold text-center mb-4">Custom Iterator for Squaring Numbers</h2>
+      <input type="text" id="numbers-input" placeholder="Enter comma-separated numbers" class="p-2 border border-gray-300 rounded mb-4 w-full">
+      <button id="square-numbers" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 w-full">Square Numbers</button>
+      <ul id="squares-list" class="list-disc pl-5 space-y-2 text-lg mt-4"></ul>
+    </div>
+
+    <!-- Prime Number Generator -->
+    <div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg">
+      <h2 class="text-2xl font-bold text-center mb-4">Prime Number Generator</h2>
+      <input type="number" id="prime-limit" placeholder="Enter prime limit" class="p-2 border border-gray-300 rounded mb-4 w-full">
+      <button id="generate-primes" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 w-full">Generate Primes</button>
+      <ul id="prime-list" class="list-disc pl-5 space-y-2 text-lg mt-4"></ul>
+    </div>
+  </div>
+
+  <script>
+    // Calculator with Promises
+    const calculator = (num1, num2, operation) => {
+      return new Promise((resolve, reject) => {
+        const a = parseFloat(num1);
+        const b = parseFloat(num2);
+
+        if (isNaN(a) || isNaN(b)) {
+          reject('Invalid input. Please enter valid numbers.');
+        }
+
+        switch (operation) {
+          case '+':
+            resolve(a + b);
+            break;
+          case '-':
+            resolve(a - b);
+            break;
+          case '*':
+            resolve(a * b);
+            break;
+          case '/':
+            if (b === 0) {
+              reject('Error: Division by zero is not allowed.');
+            } else {
+              resolve(a / b);
+            }
+            break;
+          default:
+            reject('Invalid operation. Please use +, -, *, or /.');
+        }
+      });
+    };
+
+    document.getElementById('calculator-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const num1 = document.getElementById('num1').value;
+      const num2 = document.getElementById('num2').value;
+      const operation = document.getElementById('operation').value;
+
+      calculator(num1, num2, operation)
+        .then(result => {
+          document.getElementById('result').textContent = `Result: ${result}`;
+        })
+        .catch(error => {
+          document.getElementById('result').textContent = `Error: ${error}`;
+        });
+    });
+
+    // Custom Iterator for Squaring Numbers
+    const squareIterator = (numbers) => {
+      let index = 0;
+      return {
+        [Symbol.iterator]() {
+          return {
+            next() {
+              if (index < numbers.length) {
+                const value = numbers[index] ** 2;
+                index++;
+                return { value, done: false };
+              } else {
+                return { done: true };
+              }
+            }
+          };
+        }
+      };
+    };
+
+    document.getElementById('square-numbers').addEventListener('click', () => {
+      const input = document.getElementById('numbers-input').value;
+      const numbersArray = input.split(',').map(num => parseFloat(num.trim())).filter(num => !isNaN(num));
+      
+      if (numbersArray.length === 0) {
+        alert('Please enter valid numbers!');
+        return;
+      }
+
+      const squaresList = document.getElementById('squares-list');
+      squaresList.innerHTML = '';  // Clear previous list
+
+      const iterator = squareIterator(numbersArray);
+      for (const square of iterator) {
+        const li = document.createElement('li');
+        li.textContent = `Square: ${square}`;
+        squaresList.appendChild(li);
+      }
+    });
+
+    // Prime Number Generator
+    function* primeGenerator(limit) {
+      function isPrime(num) {
+        for (let i = 2, sqrt = Math.sqrt(num); i <= sqrt; i++) {
+          if (num % i === 0) return false;
+        }
+        return num > 1;
+      }
+
+      for (let i = 2; i <= limit; i++) {
+        if (isPrime(i)) {
+          yield i;
+        }
+      }
+    }
+
+    document.getElementById('generate-primes').addEventListener('click', () => {
+      const limit = parseInt(document.getElementById('prime-limit').value);
+      if (isNaN(limit) || limit < 2) {
+        alert('Please enter a valid number greater than 1.');
+        return;
+      }
+
+      const primeList = document.getElementById('prime-list');
+      primeList.innerHTML = '';  // Clear previous list
+
+      const generator = primeGenerator(limit);
+      for (const prime of generator) {
+        const li = document.createElement('li');
+        li.textContent = `Prime: ${prime}`;
+        primeList.appendChild(li);
+      }
+    });
+  </script>
+</body>
+</html>
